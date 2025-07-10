@@ -10,39 +10,56 @@ export function Post() {
 
   //Buscar
   useEffect(() => {
-    axios.get(`${baseUrl}/1`)
-        .then(({ data }) => setPost(data))
-        .catch((error) => console.error(error.message));
+  async function buscarDados() {
+      try {
+        const resposta = await axios.get(`${baseUrl}/1`);
+        setPost(resposta.data);
+      } catch (erro) {
+        setError(erro.message);
+      }
+    }
+    buscarDados();
   }, []);
 
+
   //Criar
-function handleCriarPost(){
-  axios.post(baseUrl, {
-    title: "Novo Post",
-    body: "Conteúdo do novo post"
-})
-    .then(({ data }) => setPost(data))
-    .catch((error) => console.error(error.message));
+async function handleCriarPost(){
+  try {
+    const resposta = await axios.post(baseUrl, {
+      title: "Novo Post",
+      body: "Conteúdo do novo post"
+    });
+    setPost(resposta.data);
+  } catch (erro) {
+    setError(erro.message);
+  }
 }
+
 
  // Atualizar
-function handleAtualizarPost() {
- axios.put(`${baseUrl}/1`, {
-  title: "Post Atualizado",
-  body: "Novo conteúdo"
-})
-    .then(({ data }) => setPost(data))
-    .catch((error) => console.error(error.message));
+async function handleAtualizarPost() {
+ try {
+   const resposta = await axios.put(`${baseUrl}/1`, {
+    title: "Post Atualizado",
+    body: "Novo conteúdo"
+ });
+ setPost(resposta.data);
+  } catch (erro) {
+    setError(erro.message);
+  }
 }
 
+
+
     //Deletar
-function handleExcluirPost() {
-axios.delete(`${baseUrl}/1`)
-  .then(() => {
+async function handleExcluirPost() {
+  try {
+    await axios.delete(`${baseUrl}/1`);
     alert("Post deletado!");
     setPost(null);
-  })
-  .catch((error) => console.error(error.message));
+  } catch(erro) {
+    setError(erro.message);
+  }
 }
 
   if (!post) return <p>Carregando...</p>;
