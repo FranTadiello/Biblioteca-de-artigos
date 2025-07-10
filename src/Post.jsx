@@ -6,6 +6,8 @@ const baseUrl = "https://jsonplaceholder.typicode.com/posts";
 export function Post() {
   const [post, setPost] = useState(null);
   const [error, setError] = useState(null);
+  const [carregando, setCarregando] = useState(true);
+
 
 
   //Buscar
@@ -16,6 +18,8 @@ export function Post() {
         setPost(resposta.data);
       } catch (erro) {
         setError(erro.message);
+      } finally {
+      setCarregando(false); 
       }
     }
     buscarDados();
@@ -62,7 +66,9 @@ async function handleExcluirPost() {
   }
 }
 
-  if (!post) return <p>Carregando...</p>;
+  if (carregando) return <p>Carregando post...</p>;
+  if (error) return <p style={{ color: "red" }}>Erro: {error}</p>;
+  if (!post) return <p>Nenhum post disponível.</p>;
 
   return (
     <div>
