@@ -1,5 +1,6 @@
 import React from "react";
-import { usePost } from "./hooks/usePost";
+import { usePost } from "../hooks/usePost";
+import Postagem from "./Postagem";
 
 export function Post() {
   const {
@@ -17,8 +18,8 @@ export function Post() {
 
   return (
     <div>
-      <h2>{post.title}</h2>
-      <p>{post.body}</p>
+
+      <Postagem title={post.title} autor="Franciele" conteudo={post.body} curtidas={42} />
 
       <button onClick={handleCriarPost}>Criar Post</button>
       <button onClick={handleAtualizarPost}>Atualizar Post</button>
