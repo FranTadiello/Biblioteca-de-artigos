@@ -19,7 +19,7 @@ export function Post() {
   return (
     <div>
 
-      <Postagem title={post.title} autor="Franciele" conteudo={post.body} curtidas={42} />
+      <Postagem title={post.title} autor="Franciele" conteudo={post.body} />
 
       <button onClick={handleCriarPost}>Criar Post</button>
       <button onClick={handleAtualizarPost}>Atualizar Post</button>
