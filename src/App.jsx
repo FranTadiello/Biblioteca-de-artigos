@@ -1,11 +1,16 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Post } from "./components/Post";
+import FormularioArtigo from "./components/FormularioArtigo";
 
 function App() {
   return (
-    <div>
-      <h1>Postagens</h1>
-      <Post />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Post />} />
+        <Route path="/novo-artigo" element={<FormularioArtigo />} />  
+        
+      </Routes>
+    </Router>
   );
 }
 
